@@ -1,0 +1,20 @@
+{
+  "name": "autonomous-whistleblower-protection-vault",
+  "version": "1.0.0",
+  "description": "Decentralized Corporate Governance & DAO Malfeasance Whistleblower Escrow on GenLayer",
+  "type": "module",
+  "scripts": {
+    "test": "python test/test_autonomous_whistleblower_vault.py",
+    "deploy": "node scripts/deploy_whistleblower_vault.mjs"
+  },
+  "keywords": [
+    "genlayer",
+    "intelligent-contracts",
+    "whistleblower",
+    "dao-governance",
+    "anti-corruption",
+    "consensus"
+  ],
+  "author": "tumhi4 <tumhi4@users.noreply.github.com>",
+  "license": "MIT"
+}
