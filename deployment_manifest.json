@@ -1,12 +1,12 @@
 {
   "contractName": "AutonomousWhistleblowerProtectionVault",
-  "contractAddress": "0xc07209282b2110aBFc00883C372b24a94675C656",
-  "transactionHash": "0x0deee642685757d9da1004f28fdd3742a8ef6123362ae5740e829a14852d0e9c",
-  "deployerAddress": "0xEDcC2731A6ceA8c52834AAaaC5189BeF4cc1B732",
-  "deployedAt": "2026-10-10T21:13:35.439Z",
+  "contractAddress": "0xA47E3C057f48Ef5B37710831897603DC4C0fD036",
+  "transactionHash": "0xe0fab90ed71384889549b329d0d168eb273384e1fa728ef5254e0bfa1ef82dbf",
+  "deployerAddress": "0xEc74e8aCC15af17165F8a3F25780F962bcAf4783",
+  "deployedAt": "2026-10-10T22:00:06.193Z",
   "network": "GenLayer Studio Testnet",
   "rpcEndpoint": "https://studio.genlayer.com/api",
-  "explorerUrl": "https://explorer-studio.genlayer.com/address/0xc07209282b2110aBFc00883C372b24a94675C656",
+  "explorerUrl": "https://explorer-studio.genlayer.com/address/0xA47E3C057f48Ef5B37710831897603DC4C0fD036",
   "verification": {
     "totalPoolsCreated": 0,
     "totalVolumeLockedWei": "0",
