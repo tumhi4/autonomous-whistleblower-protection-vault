@@ -4,7 +4,6 @@
 [![GenLayer Intelligent Contracts](https://img.shields.io/badge/GenLayer-Intelligent%20Contract%20v0.2.1-blue.svg)](https://genlayer.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Security Hardened](https://img.shields.io/badge/Steward%20Audited-15--Phase%20Verified-brightgreen.svg)](test/test_autonomous_whistleblower_vault.py)
-[![Account: tumhi4](https://img.shields.io/badge/GitHub-tumhi4-orange.svg)](https://github.com/tumhi4)
 
 The **Autonomous Whistleblower Protection Vault** is an immutable, sovereign governance primitive engineered to resolve the catastrophic incentive misalignment in corporate and DAO whistleblowing: internal whistleblowers fearing career destruction, blacklisting, or leaked identities, and organizations fearing frivolous extortion or unverified smear campaigns.
 
@@ -19,7 +18,7 @@ The **Autonomous Whistleblower Protection Vault** is an immutable, sovereign gov
 | **Deployment Transaction** | `0x84f3d4ab3b85dc23cbd5a7b93c4dcfea4bf4818b421d0a05d0ff8219ed0d78f6` |
 | **Receipt Status** | `7` (`FINALIZED`) |
 | **Studio RPC** | `https://studio.genlayer.com/api` |
-| **Target Repository** | [https://github.com/tumhi4/autonomous-whistleblower-protection-vault](https://github.com/tumhi4/autonomous-whistleblower-protection-vault) |
+| **Repository** | [https://github.com/tumhi4/autonomous-whistleblower-protection-vault](https://github.com/tumhi4/autonomous-whistleblower-protection-vault) |
 | **Genesis Escrow Obligation** | `0` Wei (100% Backed, Zero Unbacked Genesis Liabilities) |
 
 ---
@@ -100,4 +99,4 @@ ALL 15 PHASES OF AutonomousWhistleblowerProtectionVault (REMEDIATED) PASSED WITH
 
 ## 5. License
 
-MIT License. Designed and deployed for GenLayer by [tumhi4](https://github.com/tumhi4).
+MIT License. Open-source intelligent contract designed and deployed for GenLayer.
