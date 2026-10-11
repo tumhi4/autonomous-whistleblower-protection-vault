@@ -6,12 +6,42 @@ import urllib.parse
 from datetime import datetime, timezone
 
 
+class MockNondetWeb:
+    def __init__(self, parent):
+        self.parent = parent
+
+    def render(self, url: str, mode: str = "text") -> str:
+        if self.parent.fail_web_fetch:
+            raise RuntimeError("Simulated network timeout connecting to dossier repository")
+        return self.parent.mock_web_responses.get(
+            url,
+            "<html><body><h1>Confidential Whistleblower Leak Dossier</h1>"
+            "<p>Audit reveals unapproved multi-sig executive withdrawal of 500,000 USDC routed to personal offshore accounts on 2026-08-14.</p></body></html>"
+        )
+
+
+class MockNondet:
+    def __init__(self, parent):
+        self.web = MockNondetWeb(parent)
+
+
+class MockEqPrinciple:
+    def __init__(self, parent):
+        self.parent = parent
+
+    def prompt_non_comparative(self, get_input_fn, task: str, criteria: str) -> str:
+        input_data = get_input_fn()
+        return self.parent.exec_prompt(task + "\n" + input_data)
+
+
 class MockGL:
     def __init__(self):
         self.transfers = []
         self.mock_web_responses = {}
         self.fail_web_fetch = False
         self.simulate_transfer_fail = False
+        self.nondet = MockNondet(self)
+        self.eq_principle = MockEqPrinciple(self)
 
     def emit_transfer(self, recipient: str, amount: int):
         if self.simulate_transfer_fail:
@@ -19,13 +49,7 @@ class MockGL:
         self.transfers.append({"recipient": str(recipient).lower(), "amount": int(amount)})
 
     def get_webpage(self, url: str) -> str:
-        if self.fail_web_fetch:
-            raise RuntimeError("Simulated network timeout connecting to dossier repository")
-        return self.mock_web_responses.get(
-            url,
-            "<html><body><h1>Confidential Whistleblower Leak Dossier</h1>"
-            "<p>Audit reveals unapproved multi-sig executive withdrawal of 500,000 USDC routed to personal offshore accounts on 2026-08-14.</p></body></html>"
-        )
+        return self.nondet.web.render(url)
 
     def exec_prompt(self, prompt: str) -> str:
         return json.dumps({
@@ -206,14 +230,18 @@ class MockAutonomousWhistleblowerProtectionVault:
         assert clean_p_id in self.pools, "[ERR_POOL_NOT_FOUND]"
         pool = self.pools[clean_p_id]
 
-        try:
-            dossier_text = self.gl.get_webpage(rep["evidence_dossier_url"])
-        except Exception:
-            raise AssertionError("[ERR_EVIDENCE_FETCH_FAILED]")
+        def get_input() -> str:
+            try:
+                dossier_text = self.gl.nondet.web.render(rep["evidence_dossier_url"], mode="text")
+            except Exception:
+                raise AssertionError("[ERR_EVIDENCE_FETCH_FAILED]")
 
-        assert dossier_text is not None and len(dossier_text.strip()) >= 30, "[ERR_EVIDENCE_FETCH_FAILED]"
+            assert dossier_text is not None and len(dossier_text.strip()) >= 30, "[ERR_EVIDENCE_FETCH_FAILED]"
+            return f"Target Organization: {pool['organization_name']}\nAlleged Malfeasance Category: {rep['category']}\n<dossier>{dossier_text}</dossier>"
 
-        raw_resp = self.gl.exec_prompt("Eval malfeasance prompt")
+        task = "Eval malfeasance prompt"
+        criteria = "Validate substantiated proof score >= 750"
+        raw_resp = self.gl.eq_principle.prompt_non_comparative(get_input, task, criteria)
         parsed_verdict = self.VERDICT_INSUFFICIENT
         rationale = "Fallback"
         score = 500
